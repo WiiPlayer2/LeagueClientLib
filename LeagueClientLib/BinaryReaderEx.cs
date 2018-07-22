@@ -50,5 +50,12 @@ namespace LeagueClientLib
             var format = lowerCase ? "x2" : "X2";
             return string.Concat(bytes.Select(o => o.ToString(format)));
         }
+
+        public byte[] ReadPadding(int sinceLastPadding, int modSize)
+        {
+            var paddingSize = (modSize - (sinceLastPadding % modSize)) % modSize;
+            var bytes = ReadBytes(paddingSize);
+            return bytes;
+        }
     }
 }
